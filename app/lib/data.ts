@@ -7,9 +7,24 @@ import {
   LatestInvoiceRaw,
   User,
   Revenue,
+  Work,
 } from "./definitions";
 import { formatCurrency } from "./utils";
 import { unstable_noStore as noStore } from "next/cache";
+
+export async function fetchWorks(query: string) {
+  noStore();
+  const searchUrl = `https://openlibrary.org/search.json?q=${encodeURIComponent(
+    query
+  )}`;
+  fetch(searchUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const resultWorks = data.docs;
+      console.log(resultWorks);
+    })
+    .catch((error) => console.log(error));
+}
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -21,11 +36,11 @@ export async function fetchRevenue() {
     // Don't do this in production :)
 
     console.log("Fetching revenue data...");
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
-    console.log("Data fetch completed after 3 seconds.");
+    // console.log("Data fetch completed after 3 seconds.");
 
     return data.rows;
   } catch (error) {
