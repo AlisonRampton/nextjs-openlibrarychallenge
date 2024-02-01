@@ -3,15 +3,21 @@
 // For simplicity of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
 export type Work = {
-  cover_i: number;
-  has_fulltext: boolean;
-  title: string;
   author_name: string[];
+  author_key: string[];
+  contributor: string[];
+  edition_count: number;
+  edition_key: string[];
   first_publish_year: number;
+  has_fulltext: boolean;
+  isbn: string[];
   key: string;
-  ia: string[];
-  author_key: string;
-  public_scan_b: boolean;
+  language: string[];
+  publish_date: string[];
+  publish_place: string[];
+  publish_year: number[];
+  publisher: string[];
+  title: string;
 };
 
 export type User = {
