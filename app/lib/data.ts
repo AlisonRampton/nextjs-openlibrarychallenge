@@ -7,9 +7,84 @@ import {
   LatestInvoiceRaw,
   User,
   Revenue,
+  Work,
 } from "./definitions";
 import { formatCurrency } from "./utils";
 import { unstable_noStore as noStore } from "next/cache";
+
+export async function fetchWorks(query: string): Promise<Work[]> {
+  noStore();
+  console.log("in fetchWorks");
+  const fixQuery = query.replaceAll(" ", "+");
+  const searchUrl = `https://openlibrary.org/search.json?q=${fixQuery}`;
+  console.log(searchUrl);
+  let resultWorks: Work[];
+  try {
+    let response = await fetch(searchUrl).then((response) => response.json());
+
+    resultWorks = response.docs.map(
+      (element: {
+        author_name: any;
+        author_key: any;
+        contributor: any;
+        edition_count: any;
+        edition_key: any;
+        first_publish_year: any;
+        has_fulltext: any;
+        isbn: any;
+        key: any;
+        language: any;
+        publish_date: any;
+        publish_place: any;
+        publish_year: any;
+        publisher: any;
+        title: any;
+      }) => ({
+        author_name: element.author_name,
+        author_key: element.author_key,
+        contributor: element.contributor,
+        edition_count: element.edition_count,
+        edition_key: element.edition_key,
+        first_publish_year: element.first_publish_year,
+        has_fulltext: element.has_fulltext,
+        isbn: element.isbn,
+        key: element.key,
+        language: element.language,
+        publish_date: element.publish_date,
+        publish_place: element.publish_place,
+        publish_year: element.publish_year,
+        publisher: element.publisher,
+        title: element.title,
+      })
+    );
+  } catch (error) {
+    console.error("Fetch Error: ", error);
+    throw new Error("Failed to fetch works");
+  }
+
+  return resultWorks;
+}
+
+const ITEMS_PER_PAGE = 6;
+export async function fetchFilteredWorks(
+  query: string,
+  currentPage: number
+): Promise<Work[]> {
+  console.log("In fetchFilteredWorks");
+  noStore();
+  // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const works = await fetchWorks(
+      `${query}&limit=${ITEMS_PER_PAGE}&page=${currentPage}`
+    );
+
+    return works;
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    throw new Error("Failed to fetch works.");
+  }
+}
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -21,11 +96,11 @@ export async function fetchRevenue() {
     // Don't do this in production :)
 
     console.log("Fetching revenue data...");
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
-    console.log("Data fetch completed after 3 seconds.");
+    // console.log("Data fetch completed after 3 seconds.");
 
     return data.rows;
   } catch (error) {
@@ -91,7 +166,21 @@ export async function fetchCardData() {
   }
 }
 
-const ITEMS_PER_PAGE = 6;
+export async function fetchWorksPages(query: string) {
+  noStore();
+  console.log("in fetchWorksPages");
+  try {
+    const count = (await fetchWorks(query)).length;
+
+    const totalPages = Math.ceil(Number(count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch total number of invoices.");
+  }
+}
+
+const ITEMS_PER_PAGE2 = 6;
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number
