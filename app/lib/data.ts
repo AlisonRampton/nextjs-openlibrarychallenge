@@ -15,9 +15,9 @@ import { unstable_noStore as noStore } from "next/cache";
 export async function fetchWorks(query: string): Promise<Work[]> {
   noStore();
   console.log("in fetchWorks");
-  const searchUrl = `https://openlibrary.org/search.json?q=${encodeURIComponent(
-    query
-  )}`;
+  const fixQuery = query.replaceAll(" ", "+");
+  const searchUrl = `https://openlibrary.org/search.json?q=${fixQuery}`;
+  console.log(searchUrl);
   let resultWorks: Work[];
   try {
     let response = await fetch(searchUrl).then((response) => response.json());
@@ -66,14 +66,17 @@ export async function fetchWorks(query: string): Promise<Work[]> {
 }
 
 const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredWorks(query: string, currentPage: number) {
+export async function fetchFilteredWorks(
+  query: string,
+  currentPage: number
+): Promise<Work[]> {
   console.log("In fetchFilteredWorks");
   noStore();
   // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
     const works = await fetchWorks(
-      `${query},limit=${ITEMS_PER_PAGE},page=${currentPage}`
+      `${query}&limit=${ITEMS_PER_PAGE}&page=${currentPage}`
     );
 
     return works;
