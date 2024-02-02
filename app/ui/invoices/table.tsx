@@ -63,22 +63,22 @@ export default async function WorksTable({
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Customer
+                  Cover
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Email
+                  Title
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Amount
+                  Author
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Date
+                  Year
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Status
-                </th>
-                <th scope="col" className="relative py-3 pl-6 pr-3">
-                  <span className="sr-only">Edit</span>
+                <th
+                  scope="col"
+                  className="px-3 py-5 font-medium hidden lg:flex"
+                >
+                  # of Editions
                 </th>
               </tr>
             </thead>
@@ -86,35 +86,33 @@ export default async function WorksTable({
               {works?.map((work) => (
                 <tr
                   key={work.key}
-                  className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                  className="w-full hover:bg-indigo-50 border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
                       <Image
-                        src={`https://covers.openlibrary.org/a/olid/${work.author_key}-M.jpg`}
-                        className="rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${work.author_name}'s profile picture`}
+                        src={`https://covers.openlibrary.org/b/olid/${work.edition_key[0]}-M.jpg`}
+                        className="mr-2 rounded-sm"
+                        // fallbackSrc="https://openlibrary.org/images/icons/avatar_book-sm.png"
+                        width={64}
+                        height={64}
+                        placeholder="blur"
+                        blurDataURL="https://openlibrary.org/images/icons/avatar_book-sm.png"
+                        alt={`Book cover`}
                       />
-                      <p>{work.author_name}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">{work.title}</td>
-                  {/* <td className="whitespace-nowrap px-3 py-3">
-                    {formatCurrency(invoice.amount)}
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {`${work.author_name[0]}${
+                      work.author_name[1] ? " et al." : ""
+                    }`}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(invoice.date)}
-                  </td> */}
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {/* <InvoiceStatus status={invoice.status} />
+                    {work.first_publish_year}
                   </td>
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex justify-end gap-3">
-                      <UpdateInvoice id={invoice.id} />
-                      <DeleteInvoice id={invoice.id} />
-                    </div> */}
+                  <td className="whitespace-nowrap px-3 py-3 hidden lg:flex">
+                    {work.edition_count}
                   </td>
                 </tr>
               ))}
