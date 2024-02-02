@@ -36,6 +36,6 @@ There is still a lot that can be done on this project. As development continues,
 ## Development Process
 
 I have not worked with search functionality in my previous development experience. To overcome this, I used this [Next.js training course](https://nextjs.org/learn/dashboard-app) to teach myself how to implement search and other important components of the site. Once I had a handle on the material, I adapted the site to use the Open Library API instead of SQL queries from a private database to retrieve search results. Once I finally got that functionality up and running, I polished the design to clearly and concisely display data to the user. I also customized the overall styling of the site to fit the theme of the project. The design process included sketching possible layouts on paper, like the one shown below:
-![Rough sketch of table design](https://github.com/AlisonRampton/nextjs-openlibrarychallenge/blob/main/public/IMG1697.jpg?raw=true)
+![Rough sketch of table design](https://github.com/AlisonRampton/nextjs-openlibrarychallenge/blob/main/public/IMG_1697.jpg?raw=true)
 
 Given time constraints, I am fairly pleased with the state of the project, at least as a minimum viable product. If provided more time, I would like to finish developing core features like detailed works pages and advanced search capabilities. I would also like to further develop the overall look and feel of the site.
