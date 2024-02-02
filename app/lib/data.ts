@@ -176,7 +176,8 @@ export async function fetchWorksPages(query: string) {
     return totalPages;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch total number of invoices.");
+    console.error(query);
+    throw new Error("Failed to fetch total number of works.");
   }
 }
 
