@@ -1,8 +1,8 @@
-import Pagination from "@/app/ui/invoices/pagination";
+import Pagination from "@/app/ui/works/pagination";
 import Search from "@/app/ui/search";
-import WorksTable from "@/app/ui/invoices/table";
+import WorksTable from "@/app/ui/works/table";
 import { lusitana } from "@/app/ui/fonts";
-import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
+import { WorksTableSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 import { fetchWorksPages } from "@/app/lib/data";
 
@@ -25,7 +25,7 @@ export default async function Page({
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Search catalog..." />
       </div>
-      <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+      <Suspense key={query + currentPage} fallback={<WorksTableSkeleton />}>
         <WorksTable query={query} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
