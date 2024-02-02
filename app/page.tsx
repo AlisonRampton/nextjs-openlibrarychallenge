@@ -1,11 +1,15 @@
+"use client";
+
 import Logo from "@/app/ui/logo";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import styles from "@/app/ui/home.module.css";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Search from "./ui/search";
 
 export default function Page() {
+  const searchParams = useSearchParams();
+
   return (
     <main className="flex min-h-screen flex-col p-6">
       <div className="flex h-20 shrink-0 items-end rounded-lg bg-emerald-600 p-4 md:h-52">
@@ -23,7 +27,7 @@ export default function Page() {
           </div>
 
           <Link
-            href="/catalog"
+            href={`/catalog?${searchParams.toString()}`}
             className="flex items-center gap-5 self-start rounded-lg bg-emerald-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-emerald-400 md:text-base"
           >
             <span>Search</span> <ArrowRightIcon className="w-5 md:w-6" />
