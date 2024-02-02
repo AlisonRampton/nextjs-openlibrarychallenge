@@ -12,13 +12,16 @@ export default function Page() {
         <Logo />
       </div>
       <div className="mt-4 flex flex-col gap-4 md:flex-row">
-        <div className="flex flex-col gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-3/5 md:px-20">
+        <div className="flex flex-col gap-6 rounded-lg bg-indigo-50 px-6 py-10 md:w-3/5 md:px-20">
           <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
             <strong>Welcome to the Varro Library!</strong>
             <br />
             Search for books below.
           </p>
-          <Search placeholder="Search works..." />
+          <div className="flex-0">
+            <Search placeholder="Search works..." />
+          </div>
+
           <Link
             href="/catalog"
             className="flex items-center gap-5 self-start rounded-lg bg-emerald-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-emerald-400 md:text-base"
