@@ -1,8 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# The Varro Library: A Next.js / Open Library API project
 
-## Getting Started
+This is a [Next.js](https://nextjs.org/) project using the [Open Library Search API](https://openlibrary.org/dev/docs/api/search).
 
-First, run the development server:
+## Setup / Running the Project
+
+The project has been deployed to the web using [Vercel](vercel.com). To view the live site, please visit (https://nextjs-openlibrarychallenge.vercel.app/).
+
+If you would prefer to run it locally for development, run the development server from the terminal:
 
 ```bash
 npm run dev
@@ -15,22 +19,23 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The pages auto-update as you edit the files.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Premise and Next Steps
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The goal of this project is to create a clean, user-friendly interface for searching Open Library's database of literary works.
 
-## Learn More
+Thus far, only basic search is currently functional. The main results page displays the book's cover, title, author, original publishing year, and number of editions.
 
-To learn more about Next.js, take a look at the following resources:
+There is still a lot that can be done on this project. As development continues, next steps include (in order of priority):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- creating detailed pages for works when selected from search results
+- adding advanced search options
+- continued experimentation with page layout and overall design
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Development Process
 
-## Deploy on Vercel
+I have not worked with search functionality in my previous development experience. To overcome this, I used this [Next.js training course](https://nextjs.org/learn/dashboard-app) to teach myself how to implement search and other important components of the site. Once I had a handle on the material, I adapted the site to use the Open Library API instead of SQL queries from a private database to retrieve search results. Once I finally got that functionality up and running, I polished the design to clearly and concisely display data to the user. I also customized the overall styling of the site to fit the theme of the project. The design process included sketching possible layouts on paper, like the one shown below:
+![Rough sketch of table design](https://github.com/AlisonRampton/nextjs-openlibrarychallenge/blob/main/public/IMG1697.jpg?raw=true)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Given time constraints, I am fairly pleased with the state of the project, at least as a minimum viable product. If provided more time, I would like to finish developing core features like detailed works pages and advanced search capabilities. I would also like to further develop the overall look and feel of the site.
