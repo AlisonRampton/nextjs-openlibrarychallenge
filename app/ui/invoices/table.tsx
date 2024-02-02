@@ -1,8 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { UpdateInvoice, DeleteInvoice } from "@/app/ui/invoices/buttons";
-import InvoiceStatus from "@/app/ui/invoices/status";
-import { formatDateToLocal, formatCurrency } from "@/app/lib/utils";
-import { fetchFilteredWorks, fetchWorks } from "@/app/lib/data";
+import { fetchFilteredWorks } from "@/app/lib/data";
 import { Work } from "@/app/lib/definitions";
 
 export default async function WorksTable({
@@ -16,21 +15,24 @@ export default async function WorksTable({
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+        <div className="rounded-lg bg-gray-300 p-2 md:pt-0">
           <div className="md:hidden">
             {works?.map((work: Work) => (
               <div
                 key={work.key}
-                className="mb-2 w-full rounded-md bg-white p-4"
+                className="mb-2 w-full rounded-md bg-white hover:bg-indigo-50 p-4"
               >
-                <div className="flex items-center justify-between border-b pb-4">
+                <div className="flex items-center justify-between">
                   <div>
                     <div className="mb-2 flex items-center">
                       <Image
                         src={`https://covers.openlibrary.org/b/olid/${work.edition_key[0]}-M.jpg`}
                         className="mr-2 rounded-sm"
+                        // fallbackSrc="https://openlibrary.org/images/icons/avatar_book-sm.png"
                         width={64}
                         height={64}
+                        placeholder="blur"
+                        blurDataURL="https://openlibrary.org/images/icons/avatar_book-sm.png"
                         alt={`Book cover`}
                       />
                       <p className="text-xl">
@@ -44,20 +46,14 @@ export default async function WorksTable({
                     }${work.author_name[1] ? " et al." : ""}`}</p>
                     <Image
                       src={`https://covers.openlibrary.org/a/olid/${work.author_key[0]}-M.jpg`}
-                      className="m-2 rounded-md hidden sm:inline-block"
+                      className="m-2 rounded-md hidden sm:inline-block object-cover"
+                      // fallbackSrc="https://openlibrary.org/static/images/icons/avatar_author-lg.png"
                       width={32}
                       height={32}
-                      objectFit="cover"
-                      // placeholder="blur"
-                      alt={`${work.author_name}'s profile picture`}
+                      placeholder="blur"
+                      blurDataURL="https://openlibrary.org/static/images/icons/avatar_author-lg.png"
+                      alt={`${work.author_name[0]}'s profile picture`}
                     />
-                  </div>
-                </div>
-                <div className="flex w-full items-center justify-between pt-4">
-                  <div>
-                    <p className="text-xl font-medium">
-                      {work.first_publish_year}
-                    </p>
                   </div>
                 </div>
               </div>
