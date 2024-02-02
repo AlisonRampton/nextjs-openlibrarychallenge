@@ -12,64 +12,57 @@ import {
 import { formatCurrency } from "./utils";
 import { unstable_noStore as noStore } from "next/cache";
 
-export async function fetchWorks(query: string) {
+export async function fetchWorks(query: string): Promise<Work[]> {
   noStore();
   console.log("in fetchWorks");
   const searchUrl = `https://openlibrary.org/search.json?q=${encodeURIComponent(
     query
   )}`;
+  let resultWorks: Work[];
   try {
-    fetch(searchUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        const resultWorks = data.docs.map(
-          (element: {
-            author_name: any;
-            author_key: any;
-            contributor: any;
-            edition_count: any;
-            edition_key: any;
-            first_publish_year: any;
-            has_fulltext: any;
-            isbn: any;
-            key: any;
-            language: any;
-            publish_date: any;
-            publish_place: any;
-            publish_year: any;
-            publisher: any;
-            title: any;
-          }) => ({
-            author_name: element.author_name,
-            author_key: element.author_key,
-            contributor: element.contributor,
-            edition_count: element.edition_count,
-            edition_key: element.edition_key,
-            first_publish_year: element.first_publish_year,
-            has_fulltext: element.has_fulltext,
-            isbn: element.isbn,
-            key: element.key,
-            language: element.language,
-            publish_date: element.publish_date,
-            publish_place: element.publish_place,
-            publish_year: element.publish_year,
-            publisher: element.publisher,
-            title: element.title,
-          })
-        );
-        console.log(resultWorks);
-        return resultWorks;
-      });
+    let response = await fetch(searchUrl).then((response) => response.json());
+
+    resultWorks = response.docs.map(
+      (element: {
+        author_name: any;
+        author_key: any;
+        contributor: any;
+        edition_count: any;
+        edition_key: any;
+        first_publish_year: any;
+        has_fulltext: any;
+        isbn: any;
+        key: any;
+        language: any;
+        publish_date: any;
+        publish_place: any;
+        publish_year: any;
+        publisher: any;
+        title: any;
+      }) => ({
+        author_name: element.author_name,
+        author_key: element.author_key,
+        contributor: element.contributor,
+        edition_count: element.edition_count,
+        edition_key: element.edition_key,
+        first_publish_year: element.first_publish_year,
+        has_fulltext: element.has_fulltext,
+        isbn: element.isbn,
+        key: element.key,
+        language: element.language,
+        publish_date: element.publish_date,
+        publish_place: element.publish_place,
+        publish_year: element.publish_year,
+        publisher: element.publisher,
+        title: element.title,
+      })
+    );
   } catch (error) {
     console.error("Fetch Error: ", error);
     throw new Error("Failed to fetch works");
   }
-  return [];
-  // .catch((error) => {
-  //   console.error(error);
-  //   return [];
-  //   throw new Error("Failed to fetch works.");
-  // });
+
+  return resultWorks;
 }
 
 const ITEMS_PER_PAGE = 6;
