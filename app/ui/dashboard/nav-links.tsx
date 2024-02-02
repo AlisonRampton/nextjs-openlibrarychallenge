@@ -11,11 +11,11 @@ import clsx from "clsx";
 // Map of links to display in the side navigation.
 const links = [
   { name: "Basic Search", href: "/catalog", icon: MagnifyingGlassIcon },
-  {
-    name: "Advanced Search",
-    href: "/catalog/advanced",
-    icon: DocumentMagnifyingGlassIcon,
-  },
+  // {
+  //   name: "Advanced Search",
+  //   href: "/catalog/advanced",
+  //   icon: DocumentMagnifyingGlassIcon,
+  // },
 ];
 
 export default function NavLinks() {
