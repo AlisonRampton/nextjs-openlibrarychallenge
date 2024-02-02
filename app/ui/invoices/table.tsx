@@ -39,14 +39,14 @@ export default async function WorksTable({
                     </div>
                   </div>
                   <div className="ml-8 flex items-center overflow-hidden">
-                    <p className="text-sm text-gray-500">{`${
+                    <p className="text-xs text-gray-500">{`${
                       work.author_name[0]
                     }${work.author_name[1] ? " et al." : ""}`}</p>
                     <Image
                       src={`https://covers.openlibrary.org/a/olid/${work.author_key[0]}-M.jpg`}
-                      className="m-2 rounded-full"
-                      width={28}
-                      height={28}
+                      className="m-2 rounded-md hidden sm:inline-block"
+                      width={32}
+                      height={32}
                       objectFit="cover"
                       // placeholder="blur"
                       alt={`${work.author_name}'s profile picture`}
