@@ -111,7 +111,7 @@ export default async function WorksTable({
                   <td className="whitespace-nowrap px-3 py-3">
                     {work.first_publish_year}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3 hidden lg:flex">
+                  <td className="whitespace-nowrap px-3 py-3 hidden lg:table-cell">
                     {work.edition_count}
                   </td>
                 </tr>
