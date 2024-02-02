@@ -27,15 +27,26 @@ export default async function WorksTable({
                   <div>
                     <div className="mb-2 flex items-center">
                       <Image
+                        src={`https://covers.openlibrary.org/b/olid/${work.edition_key[0]}-M.jpg`}
+                        className="mr-2 rounded-sm"
+                        width={64}
+                        height={64}
+                        alt={`Book cover`}
+                      />
+                      <p>{work.title}</p>
+                    </div>
+                    <div className="mb-2 flex items-center">
+                      <p className="text-sm text-gray-500">
+                        {work.author_name}
+                      </p>
+                      <Image
                         src={`https://covers.openlibrary.org/a/olid/${work.author_key}-M.jpg`}
-                        className="mr-2 rounded-full"
+                        className="m-2 rounded-full"
                         width={28}
                         height={28}
                         alt={`${work.author_name}'s profile picture`}
                       />
-                      <p>{work.author_name}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{work.title}</p>
                   </div>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
@@ -43,12 +54,7 @@ export default async function WorksTable({
                     <p className="text-xl font-medium">
                       {work.first_publish_year}
                     </p>
-                    {/* <p>{formatDateToLocal(invoice.date)}</p> */}
                   </div>
-                  {/* <div className="flex justify-end gap-2">
-                    <UpdateInvoice id={invoice.id} />
-                    <DeleteInvoice id={invoice.id} />
-                  </div> */}
                 </div>
               </div>
             ))}
